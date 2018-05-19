@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::group(['middleware'=>'auth'],function (){
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/posts','PostController');
 
@@ -42,3 +43,5 @@ Route::group(['prefix' => 'tasks'], function () {
         'as' => 'task.delete'
     ]);
 });
+
+});;

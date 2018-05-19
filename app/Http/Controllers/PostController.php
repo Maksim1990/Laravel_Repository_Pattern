@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\RemoveBadWords;
 use Illuminate\Http\Request;
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -47,8 +49,19 @@ class PostController extends Controller
 
         $input=$request->all();
         $user=Auth::user();
+        $input['user_id']=$user->id;
 
-        $post=$user->posts()->create($input);
+        $pipes = [
+            RemoveBadWords::class
+        ];
+        $post = app(Pipeline::class)
+            ->send($input)
+            ->through($pipes)
+            ->then(function ($input) {
+                return Post::create($input);
+            });
+
+
         Session::flash('post_change','Post has been successfully created!');
         return redirect('posts/'.$post->id);
 
