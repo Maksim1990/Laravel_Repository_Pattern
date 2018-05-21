@@ -8,8 +8,7 @@ class RemoveBadWords implements Pipe
 {
     public function handle($content, Closure $next)
     {
-        // Here you perform the task and return the updated $content
-        // to the next pipe
+        // Here code logic for removing Bar words
         return  $next($content);
     }
 }

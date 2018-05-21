@@ -13,6 +13,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 Route::get('/', function () {
     return view('welcome');
@@ -61,4 +62,15 @@ Route::group(['prefix' => 'tasks'], function () {
     ]);
 });
 
-});;
+});
+
+//-- Example of sending SMS with Nexmo service
+Route::get('/sms/send/{to}', function(\Nexmo\Client $nexmo, $to){
+    $message = $nexmo->message()->send([
+        'to' => $to,
+        'from' => env('NEXMO_NUMBER'),
+        'text' => 'Last Laravel test!!!!!!!'
+    ]);
+    Log::info('sent message: ' . $message['message-id']);
+    return "Sent correctly";
+});

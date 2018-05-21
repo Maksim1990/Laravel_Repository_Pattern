@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -30,10 +32,16 @@ class HomeController extends Controller
 
     public function subscribe()
     {
+
+        Log::useDailyFiles(storage_path().'/logs/debug.log');
         if(Gate::allows('subs_only',Auth::user())){
+
+            Log::info(['Request'=>"See subscribers as ". Auth::user()->name]);
             return view('subscribe');
         }else{
+            Log::error(['Request'=>"Can't see subscribers as ". Auth::user()->name]);
             return "You are not subscriber yet!";
+
         }
 
     }
