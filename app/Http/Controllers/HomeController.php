@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use RuntimeException;
 
 class HomeController extends Controller
 {
@@ -44,5 +46,13 @@ class HomeController extends Controller
 
         }
 
+    }
+
+    public function bugsnag()
+    {
+
+
+        Bugsnag::notifyException(new RuntimeException("Test error"));
+        return "Error reported to Bugsnag!";
     }
 }

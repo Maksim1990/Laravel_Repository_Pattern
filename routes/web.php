@@ -37,8 +37,8 @@ Route::resource('/posts','PostController');
     //====== Example of Policy authorization
     Route::get('/subscribe','HomeController@subscribe')->name('subscribe');
 
-
-
+    //Bugsnag example
+    Route::get('/bugsnag','HomeController@bugsnag')->name('bugsnag');
 // Task Routes
 Route::group(['prefix' => 'tasks'], function () {
     Route::get('/{id?}', [
