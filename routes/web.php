@@ -11,6 +11,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,6 +23,20 @@ Auth::routes();
 Route::group(['middleware'=>'auth'],function (){
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/posts','PostController');
+
+//====== Example of Gate authorization
+//Route::get('/subscribe',function (){
+//    if(Gate::allows('subs_only',Auth::user())){
+//        return view('subscribe');
+//    }else{
+//        return "You are not subscriber yet!";
+//    }
+//})->name('subscribe');
+
+    //====== Example of Policy authorization
+    Route::get('/subscribe','HomeController@subscribe')->name('subscribe');
+
+
 
 // Task Routes
 Route::group(['prefix' => 'tasks'], function () {
