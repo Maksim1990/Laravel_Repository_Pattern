@@ -74,3 +74,6 @@ Route::get('/sms/send/{to}', function(\Nexmo\Client $nexmo, $to){
     Log::info('sent message: ' . $message['message-id']);
     return "Sent correctly";
 });
+
+//-- Example of sending SMS with Nexmo service
+Route::get('/laravel-geoip', 'HomeController@laravelGeoIp')->name('laravelGeoIp');
