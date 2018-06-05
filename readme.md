@@ -6,7 +6,7 @@
 > - Laravel Pipeline technique
 > - Integration of [Bugsnag](https://www.bugsnag.com/) service
 > - Integration of [Google Recaptcha](https://www.google.com/recaptcha/admin#list) service
-> - Implementation of NEXMO service for sending SMS
+> - Implementation of [NEXMO](https://www.nexmo.com) service for sending SMS
 > - Implementation of Geoip service
 
 
