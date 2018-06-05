@@ -21,9 +21,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware'=>'auth'],function (){
-Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('/posts','PostController');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('/posts', 'PostController');
 
 //====== Example of Gate authorization
 //Route::get('/subscribe',function (){
@@ -35,37 +35,38 @@ Route::resource('/posts','PostController');
 //})->name('subscribe');
 
     //====== Example of Policy authorization
-    Route::get('/subscribe','HomeController@subscribe')->name('subscribe');
+    Route::get('/subscribe', 'HomeController@subscribe')->name('subscribe');
 
     //Bugsnag example
-    Route::get('/bugsnag','HomeController@bugsnag')->name('bugsnag');
+    Route::get('/bugsnag', 'HomeController@bugsnag')->name('bugsnag');
+
 // Task Routes
-Route::group(['prefix' => 'tasks'], function () {
-    Route::get('/{id?}', [
-        'uses' => 'TaskController@getAllTasks',
-        'as' => 'task.index'
-    ]);
+    Route::group(['prefix' => 'tasks'], function () {
+        Route::get('/{id?}', [
+            'uses' => 'TaskController@getAllTasks',
+            'as' => 'task.index'
+        ]);
 
-    Route::post('store', [
-        'uses' => 'TaskController@postStoreTask',
-        'as' => 'task.store'
-    ]);
+        Route::post('store', [
+            'uses' => 'TaskController@postStoreTask',
+            'as' => 'task.store'
+        ]);
 
-    Route::patch('{id}/update', [
-        'uses' => 'TaskController@postUpdateTask',
-        'as' => 'task.update'
-    ]);
+        Route::patch('{id}/update', [
+            'uses' => 'TaskController@postUpdateTask',
+            'as' => 'task.update'
+        ]);
 
-    Route::delete('{id}/delete', [
-        'uses' => 'TaskController@postDeleteTask',
-        'as' => 'task.delete'
-    ]);
-});
+        Route::delete('{id}/delete', [
+            'uses' => 'TaskController@postDeleteTask',
+            'as' => 'task.delete'
+        ]);
+    });
 
 });
 
 //-- Example of sending SMS with Nexmo service
-Route::get('/sms/send/{to}', function(\Nexmo\Client $nexmo, $to){
+Route::get('/sms/send/{to}', function (\Nexmo\Client $nexmo, $to) {
     $message = $nexmo->message()->send([
         'to' => $to,
         'from' => env('NEXMO_NUMBER'),
