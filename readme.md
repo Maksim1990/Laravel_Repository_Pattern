@@ -31,7 +31,7 @@
     cd Laravel_Repository_Pattern
     ```
 
-3. Install [NPM]([Composer](https://getcomposer.org)) & [Composer](https://getcomposer.org) dependencies
+3. Install [NPM](https://getcomposer.org) & [Composer](https://getcomposer.org) dependencies
 
     ```
     npm install
