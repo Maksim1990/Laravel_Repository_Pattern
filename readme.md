@@ -1,6 +1,6 @@
 ## Sample Laravel Repository Pattern application
 
-###### This application is an example of implementation and using following technicues and services
+###### This application is an example of implementation and using following techniques and services
 
 > - Laravel Repository Pattern
 > - Laravel Pipeline technique
